@@ -38,7 +38,7 @@ Since the enrichment operation is time consuming and can be dependent on externa
 
 - **PlayersHandler** - handler for the api calls;
 
-- **PlayresDb** - simulate document db.
+- **PlayersDb** - simulate document db.
 - **PlayersCache** - simulate redis/ dual layer cache with redis.
 
 - **StartupWorker** - startup worker to init bus consumers+ cache warmup.
