@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ExternalResources\Players.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ExternalResources\Players.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Intuit.Players.BL\Intuit.Players.BL.csproj" />
+    <ProjectReference Include="..\Intuit.Players.Bus\Intuit.Players.Bus.csproj" />
+    <ProjectReference Include="..\Intuit.Players.Cache\Intuit.Players.Cache.csproj" />
+    <ProjectReference Include="..\Intuit.Players.Common\Intuit.Players.Common.csproj" />
+    <ProjectReference Include="..\Intuit.Players.Dal\Intuit.Players.Dal.csproj" />
+    <ProjectReference Include="..\Intuit.Players.Enrichment\Intuit.Players.Enrichment.csproj" />
+    <ProjectReference Include="..\Intuit.Players.Jobs\Intuit.Players.Jobs.csproj" />
+    <ProjectReference Include="..\Intuit.Players.Models\Intuit.Players.Models.csproj" />
+    <ProjectReference Include="..\Intuit.Players.Utils\Intuit.Players.Utils.csproj" />
+  </ItemGroup>
+
+</Project>
