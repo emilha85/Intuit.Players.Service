@@ -23,35 +23,42 @@ public class RetroSheetEnrichment : IPlayerEnrichment
     {
         await _semaphore.WaitAsync();
 
-        var id = playerEnriched.Player.RetroSheetId;
-        string firstChar = id.Substring(0, 1).ToUpper();
-        var url = string.Format(UrlFormat, firstChar, id);
-
         try
         {
-            using var httpClient = new HttpClient();
-            var html = await httpClient.GetStringAsync(url);
+            var id = playerEnriched.Player.RetroSheetId;
+            string firstChar = id.Substring(0, 1).ToUpper();
+            var url = string.Format(UrlFormat, firstChar, id);
 
-            var htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
-
-            var preNode = htmlDoc.DocumentNode.SelectSingleNode("//pre[6]");
-
-            if (preNode != null)
+            try
             {
-                playerEnriched.RetroSheetData = new RetroSheetData { TranasctionInfo = preNode.InnerText };
-                return;
-            }
+                using var httpClient = new HttpClient();
+                var html = await httpClient.GetStringAsync(url);
 
-            _logger.LogError("Tranasction info node is not found");
+                var htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var preNode = htmlDoc.DocumentNode.SelectSingleNode("//pre[6]");
+
+                if (preNode != null)
+                {
+                    playerEnriched.RetroSheetData = new RetroSheetData { TranasctionInfo = preNode.InnerText };
+                    return;
+                }
+
+                _logger.LogError("Tranasction info node is not found");
+            }
+            catch (HttpRequestException ex)
+            {
+                _logger.LogError(ex, "Network error, failed to get TranasctionInfo data");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "error: failed to get TranasctionInfo");
+            }
         }
-        catch (HttpRequestException ex)
+        finally
         {
-            _logger.LogError(ex, "Network error, failed to get TranasctionInfo data");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "error: failed to get TranasctionInfo");
+            _semaphore.Release();
         }
     }
 

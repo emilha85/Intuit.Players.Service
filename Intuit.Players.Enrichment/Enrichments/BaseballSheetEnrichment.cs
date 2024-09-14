@@ -25,36 +25,45 @@ public class BaseballSheetEnrichment : IPlayerEnrichment
     {
         await _semaphore.WaitAsync();
 
-        var id = playerEnriched.Player.BaseballRefId;
-        string firstChar = id.Substring(0, 1);
-
-        var url = string.Format(UrlFormat, firstChar, id);
-
         try
         {
-            using var httpClient = new HttpClient();
-            var html = await httpClient.GetStringAsync(url);
+            
 
-            var htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
+            var id = playerEnriched.Player.BaseballRefId;
+            string firstChar = id.Substring(0, 1);
 
-            var preNode = htmlDoc.DocumentNode.SelectSingleNode("//div[@id='meta']/div[2]/p[7]");
+            var url = string.Format(UrlFormat, firstChar, id);
 
-            if (preNode != null)
+            try
             {
-                playerEnriched.BaseballReffernceData = new BaseballReffernceData { EducationData = preNode.InnerText };
-                return;
-            }
+                using var httpClient = new HttpClient();
+                var html = await httpClient.GetStringAsync(url);
 
-            _logger.LogError("The target pre node could not be found");
+                var htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
+
+                var preNode = htmlDoc.DocumentNode.SelectSingleNode("//div[@id='meta']/div[2]/p[7]");
+
+                if (preNode != null)
+                {
+                    playerEnriched.BaseballReffernceData = new BaseballReffernceData { EducationData = preNode.InnerText };
+                    return;
+                }
+
+                _logger.LogError("The target pre node could not be found");
+            }
+            catch (HttpRequestException ex)
+            {
+                _logger.LogError(ex, "Network error, failed to get EducationData");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "error: failed to get EducationData");
+            }
         }
-        catch (HttpRequestException ex)
+        finally
         {
-            _logger.LogError(ex, "Network error, failed to get EducationData");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "error: failed to get EducationData");
+            _semaphore.Release();
         }
     }
 
