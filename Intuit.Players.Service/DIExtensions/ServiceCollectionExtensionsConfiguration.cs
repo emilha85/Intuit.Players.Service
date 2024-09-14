@@ -12,6 +12,7 @@ namespace Intuit.Players.Service.DIExtensions
                  .Configure<PlayersDataParallelismDegreeOptions>(configuration.GetSection(PlayersDataParallelismDegreeOptions.SectionName))
                  .Configure<CsvPlayersReaderOptions>(configuration.GetSection(CsvPlayersReaderOptions.SectionName))
                  .Configure<ScraperEnrichmentOptions>(configuration.GetSection(ScraperEnrichmentOptions.SectionName))
+                 .Configure<RetryOptions>(configuration.GetSection(RetryOptions.SectionName))
                  .Configure<UpdatePlayerDataJobOptions>(configuration.GetSection(UpdatePlayerDataJobOptions.SectionName));                 
         }
 

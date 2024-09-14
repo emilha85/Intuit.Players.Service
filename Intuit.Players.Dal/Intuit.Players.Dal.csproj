@@ -9,9 +9,11 @@
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="33.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Intuit.Players.Common\Intuit.Players.Common.csproj" />
     <ProjectReference Include="..\Intuit.Players.Extensions\Intuit.Players.Extensions.csproj" />
     <ProjectReference Include="..\Intuit.Players.Models\Intuit.Players.Models.csproj" />
   </ItemGroup>

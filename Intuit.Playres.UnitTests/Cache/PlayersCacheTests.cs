@@ -11,7 +11,7 @@ namespace Intuit.Playres.UnitTests.Cache
     {
         private const int CacheCapacity = 1000;
 
-        private IPlayersCache _target;
+        private PlayersCache _target;
 
         [TestInitialize]
         public void Init()

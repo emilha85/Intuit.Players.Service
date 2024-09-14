@@ -56,9 +56,6 @@ namespace Intuit.Playres.UnitTests.BL
         public async Task GetById_InCache_NoEnrichment()
         {
             // Arrange
-            var limit = 10;
-            var offset = 1;
-
             var enrichedPlayer = new EnrichedPlayer(new Player { Id = "1" });
 
             _playersCache.Setup(x => x.Get(enrichedPlayer.Player.Id))

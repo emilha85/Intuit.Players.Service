@@ -1,5 +1,8 @@
-﻿using Intuit.Players.Dal;
+﻿using Intuit.Players.Common.Options;
+using Intuit.Players.Dal;
 using Intuit.Players.Models;
+using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.Extensions.Options;
 
 namespace Intuit.Playres.UnitTests.Dal
 {
@@ -11,7 +14,7 @@ namespace Intuit.Playres.UnitTests.Dal
         [TestInitialize]
         public void Init()
         {
-            _target = new PlayersDal();
+            _target = new PlayersDal(Options.Create(new RetryOptions()), NullLogger<PlayersDal>.Instance);
         }
 
         [TestMethod]
