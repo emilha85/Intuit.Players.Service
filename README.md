@@ -1,4 +1,7 @@
-# Intuit.Players.Service
+# Emil Hadad Intuit home assignment
+
+
+# Players Service
 
 ## Overview
 
