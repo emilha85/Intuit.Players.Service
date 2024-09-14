@@ -1,6 +1,0 @@
-@Intuit.Players.Service_HostAddress = http://localhost:5215
-
-GET {{Intuit.Players.Service_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
