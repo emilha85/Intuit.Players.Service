@@ -14,7 +14,7 @@ Inital players data in taken from csv file.
    - In memory db to simulate document db (e.g Mongo)
    - in memory Cache (**LRU**) to simulate distributed key value cache (e.g Redis).
 
-**EnrichementEngine** - Upon request to enriche player data, we are running all enrichments (that implments **IPlayerEnrichment**).
+**EnrichementEngine** - Upon request to enrich player data, we are running all enrichments (that implments **IPlayerEnrichment**).
 
 Player data can be enriched, with 2(or more) enrichments (html scrapers in this assignment).
 
