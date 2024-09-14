@@ -37,7 +37,7 @@ Since the enrichment operation is time consuming and can be dependent on externa
 
 - **Consumers**
   - -**PlayersDataMessageListener** - Consumer of the **PlayersDataMessage** sent by CsvPlayersReader, saves data in db.
-  - -**PlayersSearchesMessageListener** - Consumer of **PlayersSearchedMessage** sent by the handler. incrmenting plyers searched data. This will be used for the  in-memeory cache cold start. 
+  - -**PlayersSearchesMessageListener** - Consumer of **PlayersSearchedMessage** sent by the handler. incrementing players searched data. This will be used for the  in-memeory cache cold start. 
 
 - **PlayersHandler** - handler for the api calls;
 
